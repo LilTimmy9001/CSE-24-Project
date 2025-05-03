@@ -36,9 +36,10 @@ void Application::onCanvasMouseDown(bobcat::Widget* sender, float mx, float my) 
 
     if (tool == ERASER){
             dragging=true;
-            curShape = new Scribble(mx, my, 1, 1, 1, toolbar->getSize(),true);
-            canvas->addShape(curShape);
-            curShape->addPoint(mx, my, 1, 1, 1, toolbar->getSize());
+            Shape* dShape =canvas->checkSelection(mx, my);
+            if (dShape!=nullptr){
+                canvas->deleteS(dShape);
+            }
     }
 
     if (tool == CIRCLE){
@@ -114,11 +115,11 @@ void Application::onCanvasDrag(bobcat::Widget* sender, float mx, float my) {
     }
 
     else if (tool == ERASER) {
-        if (curShape==nullptr){
-            curShape = new Scribble(mx, my, 1, 1, 1, toolbar->getSize(),true);
-            canvas->addShape(curShape);
-        }
-        curShape->addPoint(mx, my, 1, 1, 1, toolbar->getSize());
+            dragging=true;
+            Shape* dShape =canvas->checkSelection(mx, my);
+            if (dShape!=nullptr){
+                canvas->deleteS(dShape);
+            }
     }
 
     if (tool == CIRCLE){
@@ -228,9 +229,15 @@ void Application::onToolbarChange(bobcat::Widget* sender) {
         canvas->selectionBox(nullptr, false);
     }
     if (toolbar->getAction() == UNDO) {
-        canvas->undo();
-        selectedShape=nullptr;
-        canvas->selectionBox(nullptr, false);
+        if (selectedShape==nullptr){
+            canvas->undo();
+            selectedShape=nullptr;
+            canvas->selectionBox(nullptr, false);
+        } else{
+            canvas->deleteS(selectedShape);
+            selectedShape=nullptr;
+            canvas->selectionBox(nullptr, false);
+        }
     }
     if (toolbar->getAction() == PLUS){
         if (selectedShape!=nullptr){

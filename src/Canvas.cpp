@@ -1,5 +1,6 @@
 #include "Canvas.h"
 #include "Point.h"
+#include "Shape.h"
 #include <GL/freeglut.h>
 #include <iterator>
 
@@ -130,6 +131,17 @@ void Canvas::sendToBack(Shape *shape){
 void Canvas::undo(){
     if (shapes.size()>0){
         shapes.pop_back();
+    }
+}
+
+void Canvas::deleteS(Shape* shape){
+    if (shapes.size()>0){
+        for(long unsigned int i =0; i<shapes.size(); i++){
+            if (shapes[i]==shape){
+                shapes.erase(shapes.cbegin()+i);
+                i = shapes.size();
+            }
+        }
     }
 }
 

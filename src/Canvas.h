@@ -29,6 +29,7 @@ public:
     Shape* checkSelection(float x, float y);
     int shapeNum() const;
     void undo();
+    void deleteS(Shape* shape);
 };
 
 #endif

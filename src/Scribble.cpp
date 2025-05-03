@@ -36,7 +36,7 @@ Scribble::Scribble(float x, float y, float r, float g, float b, float size) : Sh
 
 Scribble::Scribble(float x, float y, float r, float g, float b, float size, bool wasErase) : Shape(x, y, r, g, b) {
     this->size = size;
-    wasErase=wasErase;
+    this->wasErase=wasErase;
 }
 
 void Scribble::draw() {
@@ -73,13 +73,13 @@ void Scribble::resize(int s){
 
 
 bool Scribble::checkSelected(float x, float y){
-    for(long unsigned int i = 0; i<points.size();i++){
-        float rs = sqrt(pow(points[i]->getX()-x, 2) + pow(points[i]->getY()-y, 2));
-        if (rs<=(size/110.0)){
-            return true;
+        for(long unsigned int i = 0; i<points.size();i++){
+            float rs = sqrt(pow(points[i]->getX()-x, 2) + pow(points[i]->getY()-y, 2));
+            if (rs<=(size/110.0)){
+                return true;
+            }
         }
-    }
-    return false;
+        return false;
 }
 
 
