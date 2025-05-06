@@ -1,0 +1,23 @@
+Group Name
+----------
+
+[The name of the group]
+
+Members
+-------
+
+[Member 1 Full Name - github username]
+[Member 2 Full Name - github username]
+[Member 3 Full Name - github username]
+[Member 4 Full Name - github username]
+
+Designated Submitter
+--------------------
+
+[Member X]
+
+
+Github Repo Link
+--------------------
+
+[Github repo link]
